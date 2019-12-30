@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MSE Assignment 2</string>
+    <string name="input_name">Name...</string>
+    <string name="add_new">Add New</string>
+    <string name="delete_first">Delete First</string>
+    <string name="msg_no_friends">No friends</string>
+    <string name="activity_title_home">Friends</string>
+</resources>
