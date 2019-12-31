@@ -17,8 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private FriendAdapter mAdapter;
     private List<Friend> friendsList = new ArrayList<>();
     private DatabaseHelper db;
 
@@ -29,18 +28,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
-
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
-
-        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        layoutManager.scrollToPosition(0);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new MyDividerItemDecoration(this,LinearLayoutManager.VERTICAL,16));
+        mAdapter = new FriendAdapter(this,friendsList);
         recyclerView.setAdapter(mAdapter);
 
-        mAdapter = new FriendAdapter(this,friendsList);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new MyDividerItemDecoration(this,LinearLayoutManager.VERTICAL,16));
 
         db = new DatabaseHelper(this);
         friendsList.addAll(db.getAllFriends());
